@@ -40,7 +40,7 @@ class ResNet45_10s(nn.Module):
 
         self.layer3 = nn.Sequential(
             ConvBlock(128, [256, 256, 256], kernel_size=3, stride=2, batchnorm=self.batchnorm),
-            IdentityBlock(256, [256, 256, 256], kernel_size=3, stride=1, batchnorm=self.batchnorm),
+            IdentityBlock(256, [256, 256, 256], kernel_size=3, stride=2, batchnorm=self.batchnorm),
         )
 
         self.layer4 = nn.Sequential(
