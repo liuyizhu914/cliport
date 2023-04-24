@@ -65,7 +65,7 @@ class CLIPLingUNetLat(nn.Module):
             IdentityBlock(64, [64, 64, 64], kernel_size=3, stride=1, batchnorm=self.batchnorm),
             nn.UpsamplingBilinear2d(scale_factor=2),
         )
-        self.lat_fusion4 = FusionConvLat(input_dim=128+32, output_dim=32)
+        self.lat_fusion4 = FusionConvLat(input_dim=128+64, output_dim=32)
 
         # self.layer2 = nn.Sequential(
         #     ConvBlock(64, [32, 32, 32], kernel_size=3, stride=1, batchnorm=self.batchnorm),
