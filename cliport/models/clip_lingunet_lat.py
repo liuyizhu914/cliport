@@ -116,18 +116,18 @@ class CLIPLingUNetLat(nn.Module):
 
         x = self.lang_fuser1(x, l_input, x2_mask=l_mask, x2_proj=self.lang_proj1)
         x = self.up1(x, im[-2])
-        x = self.lat_fusion1(x, lat[-6])
+        x = self.lat_fusion1(x, lat[-5])
 
         x = self.lang_fuser2(x, l_input, x2_mask=l_mask, x2_proj=self.lang_proj2)
         x = self.up2(x, im[-3])
-        x = self.lat_fusion2(x, lat[-5])
+        x = self.lat_fusion2(x, lat[-4])
 
         x = self.lang_fuser3(x, l_input, x2_mask=l_mask, x2_proj=self.lang_proj3)
         x = self.up3(x, im[-4])
-        x = self.lat_fusion3(x, lat[-4])
+        x = self.lat_fusion3(x, lat[-3])
 
         x = self.layer1(x)
-        x = self.lat_fusion4(x, lat[-3])
+        x = self.lat_fusion4(x, lat[-2])
 
         # x = self.layer2(x)
         # x = self.lat_fusion5(x, lat[-2])
