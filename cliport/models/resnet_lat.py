@@ -22,8 +22,8 @@ class ResNet45_10s(nn.Module):
     def _make_layers(self):
         # conv1
         self.conv1 = nn.Sequential(
-            nn.Conv2d(self.input_dim, 128, stride=1, kernel_size=3, padding=1),
-            nn.BatchNorm2d(128) if self.batchnorm else nn.Identity(),
+            nn.Conv2d(self.input_dim, 64, stride=1, kernel_size=3, padding=1),
+            nn.BatchNorm2d(64) if self.batchnorm else nn.Identity(),
             nn.ReLU(True),
         )
 
@@ -33,14 +33,14 @@ class ResNet45_10s(nn.Module):
         #     IdentityBlock(64, [64, 64, 64], kernel_size=3, stride=1, batchnorm=self.batchnorm),
         # )
 
-        # self.layer2 = nn.Sequential(
-        #     ConvBlock(64, [128, 128, 128], kernel_size=3, stride=2, batchnorm=self.batchnorm),
-        #     IdentityBlock(128, [128, 128, 128], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        # )
+        self.layer2 = nn.Sequential(
+            ConvBlock(64, [128, 128, 128], kernel_size=3, stride=2, batchnorm=self.batchnorm),
+            IdentityBlock(128, [128, 128, 128], kernel_size=3, stride=1, batchnorm=self.batchnorm),
+        )
 
         self.layer3 = nn.Sequential(
             ConvBlock(128, [256, 256, 256], kernel_size=3, stride=2, batchnorm=self.batchnorm),
-            IdentityBlock(256, [256, 256, 256], kernel_size=3, stride=2, batchnorm=self.batchnorm),
+            IdentityBlock(256, [256, 256, 256], kernel_size=3, stride=1, batchnorm=self.batchnorm),
         )
 
         self.layer4 = nn.Sequential(
@@ -97,7 +97,7 @@ class ResNet45_10s(nn.Module):
         in_shape = x.shape
 
         # encoder
-        for layer in [self.conv1, self.layer3, self.layer4, self.layer5]:
+        for layer in [self.conv1, self.layer2, self.layer3, self.layer4, self.layer5]:
             x = layer(x)
 
         # decoder
