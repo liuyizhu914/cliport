@@ -67,12 +67,6 @@ class CLIPLingUNetLat(nn.Module):
         )
         self.lat_fusion4 = FusionConvLat(input_dim=128+64, output_dim=32)
 
-        # self.layer2 = nn.Sequential(
-        #     ConvBlock(64, [32, 32, 32], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        #     IdentityBlock(32, [32, 32, 32], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        #     nn.UpsamplingBilinear2d(scale_factor=2),
-        # )
-        # self.lat_fusion5 = FusionConvLat(input_dim=64+32, output_dim=32)
 
         self.layer3 = nn.Sequential(
             ConvBlock(32, [16, 16, 16], kernel_size=3, stride=1, batchnorm=self.batchnorm),
@@ -129,8 +123,6 @@ class CLIPLingUNetLat(nn.Module):
         x = self.layer1(x)
         x = self.lat_fusion4(x, lat[-2])
 
-        # x = self.layer2(x)
-        # x = self.lat_fusion5(x, lat[-2])
 
         x = self.layer3(x)
         x = self.lat_fusion6(x, lat[-1])
