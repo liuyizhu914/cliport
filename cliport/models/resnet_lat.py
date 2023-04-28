@@ -28,10 +28,6 @@ class ResNet45_10s(nn.Module):
         )
 
         # fcn
-        # self.layer1 = nn.Sequential(
-        #     ConvBlock(64, [64, 64, 64], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        #     IdentityBlock(64, [64, 64, 64], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        # )
 
         self.layer2 = nn.Sequential(
             ConvBlock(64, [128, 128, 128], kernel_size=3, stride=2, batchnorm=self.batchnorm),
@@ -78,11 +74,6 @@ class ResNet45_10s(nn.Module):
             nn.UpsamplingBilinear2d(scale_factor=2),
         )
 
-        # self.layer10 = nn.Sequential(
-        #     ConvBlock(64, [32, 32, 32], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        #     IdentityBlock(32, [32, 32, 32], kernel_size=3, stride=1, batchnorm=self.batchnorm),
-        #     nn.UpsamplingBilinear2d(scale_factor=2),
-        # )
 
         # conv2
         self.conv2 = nn.Sequential(
